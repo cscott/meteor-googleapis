@@ -1,6 +1,9 @@
 var googleapis = Npm.require('googleapis');
 var crypto = Npm.require('crypto');
 
+// meteor < 0.9.3 compatibility
+var wrapAsync = (Meteor.wrapAsync || Meteor._wrapAsync).bind(Meteor);
+
 var globalAuth;
 
 Gapi = {
@@ -10,7 +13,7 @@ Gapi = {
 
   // Helper functions to execute a google api request.
   // Execution is synchronous if callback is omitted
-  exec: Meteor._wrapAsync(function(request, auth, callback) {
+  exec: wrapAsync(function(request, auth, callback) {
     if (typeof(callback)==='undefined' && typeof(auth)==='function') {
       callback = auth; auth = undefined; // shift args over
     }
@@ -20,7 +23,7 @@ Gapi = {
   }),
 
   // Helper function to execute google authorization, synchronously
-  authorize: Meteor._wrapAsync(function(auth, callback) {
+  authorize: wrapAsync(function(auth, callback) {
     auth.authorize(callback);
   }),
 
