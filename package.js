@@ -1,15 +1,25 @@
 Package.describe({
-  summary: "Wrapper around npm package : googleapis",
-  version: "1.0.10",
-  git: "https://github.com/productiveme/meteor-googleapis.git"
+  name: 'cscottnet:googleapis',
+  summary: 'Interface with Google APIs on Meteor server',
+  version: '0.4.7',
+  git: 'https://github.com/cscott/meteor-googleapis.git'
 });
 
-Npm.depends( {
-	"googleapis": "1.0.10"
-} );
+Npm.depends({"googleapis": "0.4.7"});
 
-Package.on_use(function (api, where) {
-  api.versionsFrom("METEOR@0.9.0");
-  api.add_files("googleapis.js", "server");
-  if(api.export) api.export('googleapis');
+Package.onUse(function(api) {
+  api.versionsFrom('METEOR@0.9.0');
+  api.use(['ejson'], 'server');
+  api.addFiles([
+    'googleapis.js'
+  ], 'server');
+  if (api.export) { api.export('Gapi', 'server'); }
+});
+
+Package.onTest(function(api) {
+  /*
+  api.use('tinytest');
+  api.use('cscottnet:googleapis');
+  api.addFiles('googleapis-tests.js');
+  */
 });
