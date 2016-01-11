@@ -1,7 +1,7 @@
 Package.describe({
   name: 'cscottnet:googleapis',
   summary: 'Interface with Google APIs on Meteor server',
-  version: '2.1.7',
+  version: '2.1.7_1',
   git: 'https://github.com/cscott/meteor-googleapis.git'
 });
 

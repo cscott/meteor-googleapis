@@ -13,13 +13,13 @@ Gapi = {
 
   // Helper functions to execute a google api request.
   // Execution is synchronous if callback is omitted
-  exec: wrapAsync(function(request, auth, callback) {
+  exec: wrapAsync(function(base, name, params, auth, callback) {
     if (typeof(callback)==='undefined' && typeof(auth)==='function') {
       callback = auth; auth = undefined; // shift args over
     }
     auth = auth || globalAuth;
-    if (auth) { request = request.withAuthClient(auth); }
-    request.execute(callback);
+    if (auth) { params.auth = auth; }
+    base[name](params, callback);
   }),
 
   // Helper function to execute google authorization, synchronously
